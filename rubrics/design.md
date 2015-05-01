@@ -5,7 +5,8 @@
 ### Composition
 
 It should be possible to build new microservices by composing the operations of existing ones.
-Each microservice should therefore provide well-defined interfaces for the operations it offers to the network.
+Each microservice should therefore provide well-defined interfaces for the operations it offers to the network. Preferably, compatibility of service interfaces should be machine checkable.
+Another important aspect is whether service interfaces are [cohesive](http://en.wikipedia.org/wiki/Cohesion_(computer_science)).
 
 ### Efficiency
 
@@ -45,7 +46,7 @@ A microservice should be resilient to failures. Failures fall in different categ
 <tr>
 	<td><strong>Composition</strong></td>
 	<td><ul><li>Formally-defined interfaces.</li>
-	<li>Machine-checkable compatibility.</li>
+	<li>Interfaces are coherent and complete.</li>
 	</ul></td>
 	<td><ul><li>Formally-defined interfaces.</li>
 	<li>Requires some manual checking for compatibility.</li>
@@ -112,3 +113,8 @@ A microservice should be resilient to failures. Failures fall in different categ
 | **Elasticity** | _Synergy_ | - | - | _Synergy_ | _Synergy_ |
 | **Monitoring** | _Synergy_ | _Tension_ | _Synergy_ | - | _Synergy_ |
 | **Resilience** | - | _Tension_ | _Synergy_ | _Synergy_ | - |
+
+<!--
+### Explanation
+
+ **Composition** is in _tension_ with **Efficiency**,  -->
