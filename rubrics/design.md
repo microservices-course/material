@@ -6,7 +6,7 @@
 
 It should be possible to build new microservices by composing the operations of existing ones.
 Each microservice should therefore provide well-defined interfaces for the operations it offers to the network. Preferably, compatibility of service interfaces should be machine checkable.
-Another important aspect is whether service interfaces are [cohesive](http://en.wikipedia.org/wiki/Cohesion_(computer_science)).
+Another important aspect is whether service interfaces are [cohesive](http://en.wikipedia.org/wiki/Cohesion_(computer_science)), and whether it is easy to use them from different technologies (e.g., different programming languages and framework).
 
 ### Efficiency
 
@@ -46,13 +46,13 @@ A microservice should be resilient to failures. Failures fall in different categ
 <tr>
 	<td><strong>Composition</strong></td>
 	<td><ul><li>Formally-defined interfaces.</li>
-	<li>Interfaces are coherent and complete.</li>
+	<li>Interfaces are coherent and can be integrated with different technologies.</li>
 	</ul></td>
 	<td><ul><li>Formally-defined interfaces.</li>
-	<li>Requires some manual checking for compatibility.</li>
+	<li>Interfaces are not coherent, or support only one client technology.</li>
 	</ul></td>
 	<td><ul><li>Interfaces are only informally documented.</li>
-	<li>Compatibility is manually checked.</li>
+	<li>Interfaces are not coherent nor support different client technologies.</li>
 	</ul></td>
 	<td><ul><li>Interfaces are not specified.</li>
 	</ul></td>
