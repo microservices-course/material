@@ -46,13 +46,13 @@ A microservice should be resilient to failures. Failures fall in different categ
 <tr>
 	<td><strong>Composition</strong></td>
 	<td><ul><li>Formally-defined interfaces.</li>
-	<li>Interfaces are coherent and can be integrated with different technologies.</li>
+	<li>Interfaces are cohesive and can be integrated with different technologies.</li>
 	</ul></td>
 	<td><ul><li>Formally-defined interfaces.</li>
-	<li>Interfaces are not coherent, or support only one client technology.</li>
+	<li>Interfaces are not cohesive, or support only one client technology.</li>
 	</ul></td>
 	<td><ul><li>Interfaces are only informally documented.</li>
-	<li>Interfaces are not coherent nor support different client technologies.</li>
+	<li>Interfaces are not cohesive nor support different client technologies.</li>
 	</ul></td>
 	<td><ul><li>Interfaces are not specified.</li>
 	</ul></td>
@@ -117,4 +117,10 @@ A microservice should be resilient to failures. Failures fall in different categ
 <!--
 ### Explanation
 
- **Composition** is in _tension_ with **Efficiency**,  -->
+**Composition**
+ 
+* _Tension_ with **Efficiency**. The more granular an MSA is, the more messages are required to perform tasks.
+* _Synergy_ with **Elasticity**. Replication and load balancing are easier to implement if the services are easily composable. Also, composition benefits from the mechanisms that usually come with elasticity, e.g., service registries. 
+
+**Efficiency**
+  -->
