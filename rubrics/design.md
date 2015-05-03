@@ -1,5 +1,7 @@
 # Evaluating the Design and Implementation of a Microservice Architecture (MSA)
 
+_[Fabrizio Montesi](http://www.fabriziomontesi.com/), University of Southern Denmark_
+
 ## Some key properties
 
 ### Composition
