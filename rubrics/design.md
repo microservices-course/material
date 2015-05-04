@@ -2,7 +2,7 @@
 
 _[Fabrizio Montesi](http://www.fabriziomontesi.com/), University of Southern Denmark. If you cite content from this page, do not copy it but include a link to this page._
 
-This is a small, and very preliminary, guide for evaluating the design of microservices in a Microservice Architecture (MSA). Some may call it a cheatsheet, or a checklist, for people who are already familiar with some of the concepts in here. If you have comments, please feel free to [contact the author](http://www.fabriziomontesi.com/). For example, I intentionally left out testing and verification, as these are more "high-level" aspects that can be built on top of the ones discussed below.
+This is a small, and very preliminary, guide for evaluating the design of microservices in a Microservice Architecture (MSA). Some may call it a cheatsheet, or a checklist, for people who are already familiar with some of the concepts in here. If you have comments, please feel free to [contact the author](http://www.fabriziomontesi.com/). For example, I intentionally left out testing and verification, as here I focus on design and these are more "high-level" aspects that can be built on top of the ones discussed below.
 
 ## Some key properties
 
