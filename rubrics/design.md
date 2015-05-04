@@ -1,6 +1,6 @@
 # Evaluating the Design and Implementation of a Microservice Architecture (MSA)
 
-_[Fabrizio Montesi](http://www.fabriziomontesi.com/), University of Southern Denmark_. If you cite content from this page, do not copy it but include a link to this page.
+_[Fabrizio Montesi](http://www.fabriziomontesi.com/), University of Southern Denmark. If you cite content from this page, do not copy it but include a link to this page._
 
 ## Some key properties
 
