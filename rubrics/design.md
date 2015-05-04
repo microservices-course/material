@@ -141,6 +141,8 @@ The synergy arises from the fact that elasticity can help in making the service 
 
 ## Microservice aspects in [the Jolie programming language](http://www.jolie-lang.org/)
 
+_It would be nice to have more information about other languages and frameworks here, so contributions are welcome!_
+
 Composition can be easily achieved, since in Jolie all components are microservices and all collaborations among microservices are achieved through [communication ports](http://docs.jolie-lang.org/#!documentation/basics/communication_ports.html), which come with machine-checkable interfaces and integration facilities.
 
 For efficiency, see the [FAQ](http://jolie-lang.org/faq.html). Jolie is optimised for the network but not for the efficiency of internal computation. Coordination is thus handled well using Jolie, and performance-critical components that require lower-level languages should be composed as sub-services (there is native support for Java and Javascript, and support for C and other languages through Java).
