@@ -123,7 +123,7 @@ Many aspects have tensions and synergies with other aspects, making the design o
 | **Efficiency** | _Tension_ | - | - | _Tension_ | _Tension_ |
 | **Elasticity** | _Synergy_ | - | - | _Synergy_ | _Tension and Synergy_ |
 | **Monitoring** | _Synergy_ | _Tension_ | _Synergy_ | - | _Synergy_ |
-| **Resilience** | - | _Tension_ | _Synergy_ | _Synergy_ | - |
+| **Resilience** | - | _Tension_ | _Tension and Synergy_ | _Synergy_ | - |
 
 ### Explanation
 
