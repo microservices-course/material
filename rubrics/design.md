@@ -1,6 +1,8 @@
-# Evaluating the Design and Implementation of a Microservice Architecture (MSA)
+# Evaluating the Design and Implementation of a Microservice
 
 _[Fabrizio Montesi](http://www.fabriziomontesi.com/), University of Southern Denmark. If you cite content from this page, do not copy it but include a link to this page._
+
+This is a small, and very preliminary, guide for evaluating the design of microservices in a Microservice Architecture (MSA). Some may call it a cheatsheet, or a checklist, for people who are already familiar with some of the concepts in here. If you have comments, please feel free to [contact the author](http://www.fabriziomontesi.com/).
 
 ## Some key properties
 
