@@ -1,6 +1,6 @@
 # Evaluating the Design and Implementation of a Microservice Architecture (MSA)
 
-_[Fabrizio Montesi](http://www.fabriziomontesi.com/), University of Southern Denmark_
+_[Fabrizio Montesi](http://www.fabriziomontesi.com/), University of Southern Denmark_. If you cite content from this page, do not copy it but include a link to this page.
 
 ## Some key properties
 
@@ -12,7 +12,7 @@ Another important aspect is whether service interfaces are [cohesive](http://en.
 
 ### Efficiency
 
-A microservice should not waste resources. Here we are particularly interested in the following three resources.
+A microservice should not waste resources, just as with any other software. Here we are particularly interested in the following three resources.
 * Network: how many messages are used to implement a functionality, and how big is their respective payload.
 * Memory: how much memory does the service use for its internal computation.
 * Time: how much time does it take to complete internal computations.
@@ -34,10 +34,13 @@ The communications happening inside of an MSA should be observable. This can be 
 
 ### Resilience
 
-A microservice should be resilient to failures. Failures fall in different categories, for examples the ones in the following.
+A microservice should be resilient to failures. Failures fall in different categories, for example:
 * Service failures: other services in the system fail to provide some functionality our service depends on.
-* Network failures: some endpoints become unreachable, sudden disconnection.
-* Low-level failures: unexpected machine reboots, crash of an underlying middleware, etc.
+* Low-level failures: some endpoints become unreachable, application crash, sudden machine reboot, etc.
+
+With respect to service failures, an important feature is their detection and correct propagation among the services in the MSA. These "high-level" errors are usually application level errors that should be dealt with in the application logic.
+
+With respect to low-level failures, we are interested in seeing whether the service can go back to its normal execution once it becomes possible for it to operate again (e.g., reboot completes). An important decision is therefore about what data should persist throughout low-level failures, e.g., with the assistance of databases or filesystems.
 
 ## Rubric for the Evaluation of Microservice Design
 
@@ -94,13 +97,13 @@ A microservice should be resilient to failures. Failures fall in different categ
 </tr>
 <tr>
 	<td><strong>Resilience</strong></td>
-	<td><ul><li>Can detect and react to all failures.</li>
+	<td><ul><li>Handles service failures and does not lose state due to low-level failures.</li>
 	</ul></td>
-	<td><ul><li>Can react to service and network failures, but not low-level failures.</li>
+	<td><ul><li>Handles service failures but loses some state between low-level failures.</li>
 	</ul></td>
-	<td><ul><li>Can only react to service or network failures.</li>
+	<td><ul><li>Handles only service failures.</li>
 	</ul></td>
-	<td><ul><li>Cannot react to any failure.</li>
+	<td><ul><li>Does not handle failures.</li>
 	</ul></td>
 </tr>
 </table>
@@ -108,21 +111,40 @@ A microservice should be resilient to failures. Failures fall in different categ
 
 ## Tensions / Synergies
 
+Many aspects have tensions and synergies with other aspects, making the design of microservices nontrivial and exposing the need for customisation. Developers should keep them in mind when evaluating a design against requirements, and think about which compromises best fit the project at hand. We give a summary below (click on the star next to each item to get to the explanation).
+
 | Property / Property | Composition | Efficiency | Elasticity | Monitoring | Resilience |
 | --- | :---: | :---: | :---: | :---: | :---: |
-| **Composition** | - | _Tension_ | _Synergy_ | - | - |
+| **Composition** | - | _Tension_ | _Synergy_ | _Synergy_ | - |
 | **Efficiency** | _Tension_ | - | - | _Tension_ | _Tension_ |
-| **Elasticity** | _Synergy_ | - | - | _Synergy_ | _Synergy_ |
+| **Elasticity** | _Synergy_ | - | - | _Synergy_ | _Tension and Synergy_ |
 | **Monitoring** | _Synergy_ | _Tension_ | _Synergy_ | - | _Synergy_ |
 | **Resilience** | - | _Tension_ | _Synergy_ | _Synergy_ | - |
 
-<!--
 ### Explanation
 
-**Composition**
- 
-* _Tension_ with **Efficiency**. The more granular an MSA is, the more messages are required to perform tasks.
-* _Synergy_ with **Elasticity**. Replication and load balancing are easier to implement if the services are easily composable. Also, composition benefits from the mechanisms that usually come with elasticity, e.g., service registries. 
+We give a brief explanation for each tension and synergy.
 
-**Efficiency**
-  -->
+* Tension between **Composition** and **Efficiency**. The more granular an MSA is, the more messages may be required to perform tasks.
+* Synergy between **Composition** and **Elasticity**. Replication and load balancing are easier to implement if the services are easily composable. Also, composition benefits from the mechanisms that usually come with elasticity, e.g., service registries.
+* Synergy between **Composition** and **Monitoring**. Having a granular MSA helps monitoring, because the execution of tasks can be tracked more precisely as each task is implemented via observable message exchanges.
+* Tension between **Efficiency** and **Monitoring**. Adding monitoring usually introduces a performance overhead, internally and/or in the network.
+* Tension between **Efficiency** and **Resilience**. Making a service resilient usually entails using filesystems or databases instead of volatile memory, which is typically faster.
+* Synergy between **Elasticity** and **Monitoring**. Elasticity and Monitoring usually go hand in hand. Monitoring of load and/or performance can help in determining when a service needs to be scaled up or down. Elasticity can also help in mitigating the overhead that monitoring introduces on efficiency, by distributing it over multiple nodes.
+* Tension and Synergy between **Elasticity** and **Resilience**.
+The tension comes from the persistent data that a resilient service usually has to store, which can make the service harder to replicate in an elastic environment (sometimes it is incorrect to replicate the data, too, which must be dealt with separately, increasing complexity). Observe that services with stateless interfaces often still have persistent data behind them.
+The synergy arises from the fact that elasticity can help in making the service more resilient, since if one instance of the service goes down a client may be redirected to another one.
+* Synergy between **Monitoring** and **Resilience**. Monitoring can be critical in reacting to some problems, such as excessive load, helping resilience. In some cases, this may justify the introduction of active monitoring, i.e., a monitoring infrastructure that can then apply changes to the behaviour of the MSA depending on the events it registers.
+
+
+## Microservice aspects in [the Jolie programming language](http://www.jolie-lang.org/)
+
+Composition can be easily achieved, since in Jolie all components are microservices and all collaborations among microservices are achieved through [communication ports](http://docs.jolie-lang.org/#!documentation/basics/communication_ports.html), which come with machine-checkable interfaces and integration facilities.
+
+For efficiency, see the [FAQ](http://jolie-lang.org/faq.html). Jolie is optimised for the network but not for the efficiency of internal computation. Coordination is thus handled well using Jolie, and performance-critical components that require lower-level languages should be composed as sub-services (there is native support for Java and Javascript, and support for C and other languages through Java).
+
+For elasticity, it helps that changing the deployment of Jolie services does not influence their behaviour definition (the "code" running inside of a service, or its implementation). Handling the elasticity of persistent data is still left as a manual task to the programmer (assuming the use of databases that can handle replication).
+
+All Jolie services are optionally monitorable with a native and customisable infrastructure (monitors can be either internal or external services, see [here](http://docs.jolie-lang.org/#!documentation/jsl/Runtime.html), operation setMonitor).
+
+For resilience, Jolie comes with [advanced fault handling](http://docs.jolie-lang.org/#!documentation/fault_handling/termination_and_compensation.html) features for handling service failures. Low-level failures are still left entirely to the programmer.
