@@ -6,6 +6,8 @@ This is a small, and very preliminary, guide for evaluating the design of micros
 
 ## Some key properties
 
+We discuss a (non-exhaustive) list of some key properties that should be considered in the design of microservices. We will summarise these observations as a rubric in the next section.
+
 ### Composition
 
 It should be possible to build new microservices by composing the operations of existing ones.
